@@ -1,51 +1,58 @@
-var globalClientes = (function () {
-	
+'use strict';
+
+//Quando for criar objeto colocar no singular
+//Criar um construtor 
+//Existe um convenção no javascript para quando foir criar um costrutor a primeira letra ser maiuscula 
+var Cliente = function(){
+
 	var todosClientes = [];
-	
-	var melhoresClientes =[];
-	
-	var listaTodosClientes = function() {
+	var melhoresClientes = [];
+
+	this.listaTodosClientes = function() {
 		return todosClientes;
 	};
 	
-	var listaMelhoresClientes = function() {
+	this.listaMelhoresClientes = function() {
 		return melhoresClientes;
 	};
 
-	var adicionarCliente = function(item) {
+	this.adicionarCliente = function(item) {
 		todosClientes.push(item);
 	};
 
-	var adicionarMelhorCliente = function(item) {
+	this.adicionarMelhorCliente = function(item) {
 		melhoresClientes.push(item);
 	};
-
-	return { todosClientes: listaTodosClientes, 
-			 melhoresClientes : listaMelhoresClientes, 
-			 adicionar: adicionarCliente,
-			 adicionarMelhor : adicionarMelhorCliente	
-	};
-})();
-
-function printa(item) {
-	console.log("todos os clientes: ");
-	console.log(item.todosClientes());
-	console.log("*******************");
-	console.log("melhores clientes: ");
-	console.log(item.melhoresClientes());
-	console.log("*******************");
 };
 
-var gcliente = globalClientes;
-printa(gcliente);
+var AppTeste = function(){
+	// No javascript usa aspas simple para string
+	function printa(item) {
+		console.log('todos os clientes: ');
+		console.log(item.listaTodosClientes());
+		console.log('*******************');
+		console.log('melhores clientes: ');
+		console.log(item.listaMelhoresClientes());
+		console.log('*******************');
+	}
 
-gcliente.adicionar({nome: "lysandro", sexo: "m"});
-gcliente.adicionar({nome: "Joao Pedro", sexo: "m"});
-gcliente.adicionar({nome: "Amanda", sexo: "f"});
-gcliente.adicionar({nome: "Lysandra", sexo: "f"});
-printa(gcliente);
+	this.init = function(){
+		var gcliente = new Cliente();
+		printa(gcliente);
 
-gcliente.adicionarMelhor({nome: "lysandro", sexo: "m"});
-gcliente.adicionarMelhor({nome: "Joao Pedro", sexo: "m"});	
-printa(gcliente);
+		// No javascript usa aspas simple para string 
+		gcliente.adicionarCliente({nome: 'lysandro', sexo: 'm'});
+		gcliente.adicionarCliente({nome: 'Joao Pedro', sexo: 'm'});
+		gcliente.adicionarCliente({nome: 'Amanda', sexo: 'f'});
+		gcliente.adicionarCliente({nome: 'Lysandra', sexo: 'f'});
+		printa(gcliente);
+
+		gcliente.adicionarMelhorCliente({nome: 'lysandro', sexo: 'm'});
+		gcliente.adicionarMelhorCliente({nome: 'Joao Pedro', sexo: 'm'});	
+		printa(gcliente);	
+	}
+
+}
+ 
+
 
