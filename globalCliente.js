@@ -53,6 +53,9 @@ var AppTeste = function(){
 	}
 
 }
+
+var app = new AppTeste();
+app.init();
  
 
 
